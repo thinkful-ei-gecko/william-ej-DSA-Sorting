@@ -1,4 +1,4 @@
-const {LinkedList, _Node} = require('./linkedList')
+const { LinkedList } = require('./linkedList')
 
 //1.Understanding merge sort
 
@@ -72,6 +72,7 @@ First item is pivot:
 [3, 9, 12, 10] [13, 14] [15, 16, 19, 17]
 */
 
+// 3. Implementing quicksort
 let numbers = [89,30,25,32,72,70,51,42,25,24,53,55,78,50,
     13,40,48,32,26,2,14,33,45,72,56,44,21,88,27,68,15,62,
     93,98,73,28,16,46,87,28,65,38,67,16,85,63,23,69,64,91,
@@ -98,7 +99,7 @@ function partition(array, start, end){
     return j;
 }
 
-function qSort(array, start = 0, end = array.length - 1){
+function qSort(array, start = 0, end = array.length){
     if (start >= end){
         return array
     }
@@ -110,8 +111,8 @@ function qSort(array, start = 0, end = array.length - 1){
 }
 // console.log(qSort(numbers))
 
-// Q4. Merge Sorting
 
+// Q4. Merge Sorting
 function mergeSort(array){
     if(array.length <= 1){
         return array;
@@ -148,9 +149,10 @@ function merge(left, right, array){
 
     return array;
 }
-
 // console.log(mergeSort(numbers))
 
+
+// 5. Sorting a linked list using merge sort
 let list = new LinkedList();
 list.insertFirst(2)
 list.insertLast(21)
@@ -196,15 +198,15 @@ function mergeLink(linkedList){
 
     return result;
 }
-
 // console.log(mergeLink(list));
 
+
+//6. Bucket sort
 let buckets = [87, 42, 15, 2, 79, 50]
 
 function bucketSort(array, max, min){
-
     let result = [];
-    
+
     for(let i = 0; i < max; i++){
         result[i] = 'EMPTY BUCKET'
     }
@@ -212,8 +214,42 @@ function bucketSort(array, max, min){
     for(let i = 0; i < array.length; i++){
         result[array[i] - min] = array[i]
     }
-
     return result
 }
 
 // console.log(bucketSort(buckets, 87, 2))
+
+
+//7. Sort in place
+const array = [1,2,3,4,5,6];
+
+//Bubble sort and quick sort keep the array in-place...
+function shuffleArray(array) {
+  let lastIndex = array.length - 1;
+  for(let i = 0; i < array.length; i++) {
+    const tmp = array[i];
+    let j = Math.floor(Math.random() * lastIndex) + 1;
+    array[i] = array[j];
+    array[j] = tmp;
+  }
+  return array;
+}
+// console.log(shuffleArray(array));
+
+
+//8. Sorting books
+const books = ['Hello', 'These', 'Are', 'Book', 'Again','Bye', 'Title', 'A', 'B', 'Help', 'Too', 'Much', 'Words'];
+
+function organizeBooks(array) {
+  for(let i = 0; i < array.length; i++) {
+    for(let j = i + 1; j < array.length; j++) {
+      if(array[i] < array[j]) {
+        let tmp = array[i];
+        array[i] = array[j];
+        array[j] = tmp;
+      }
+    }
+  }
+  return array.sort((a,b) => b < a);
+}
+// console.log(organizeBooks(books));
